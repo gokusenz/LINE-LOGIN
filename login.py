@@ -39,7 +39,7 @@ class QRLogin:
             self.request("verifyCertificate", headers, session = session, certificate = certificate)
         except:
             pin = self.request("createPinCode", headers, session = session)
-            if pin:
+            if web:
                 self.client.pin.update(session, pin)
             else:
                 callback(pin)
