@@ -18,6 +18,10 @@ class QRLogin:
         "lite": {
             "user-agent": "LLA/2.16.0",
             "x-line-application": "ANDROIDLITE\t2.16.0\tAndroid OS\t10;SECONDARY"
+        },
+        "ipad": {
+            "user-agent": "Line/10.21.3",
+            "x-line-application": "IOSIPAD\t10.21.3\tiOS\t14.3;SECONDARY"
         }
     }
 
@@ -48,6 +52,6 @@ class QRLogin:
 
 if __name__ == "__main__":
     qr = QRLogin()
-    result = qr.loginWithQrCode("lite", web = True)
+    result = qr.loginWithQrCode("ipad", web = True)
     print("Access Token: " + result.accessToken)
     print("Certificate: " + result.certificate)
