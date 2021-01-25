@@ -10,7 +10,7 @@ class LoginResult:
 
 class QRLogin:
 
-    HOST = "https://gd2.line.naver.jp"
+    HOST = "https://legy-jp.line.naver.jp"
     PATH = HOST + "/acct/lgn/sq/v1"
     POLL = HOST + "/acct/lp/lgn/sq/v1"
 
@@ -31,12 +31,23 @@ class QRLogin:
         headers = QRLogin.HEADERS[application]
         session = self.request("createSession", headers)
         result = self.request("createQrCode", headers, session = session)
-        callback(result.web if web else result.url)
+        callback(result.url)
+        if web:
+            callback(result.web)
         self.request("checkQrCodeVerified", {**headers, **{"x-line-access": session}}, lp = True, session = session)
         try:
             self.request("verifyCertificate", headers, session = session, certificate = certificate)
         except:
             pin = self.request("createPinCode", headers, session = session)
-            callback(pin)
+            if pin:
+                self.client.pin.update(session, pin)
+            else:
+                callback(pin)
             self.request("checkPinCodeVerified", {**headers, **{"x-line-access": session}}, lp = True, session = session)
         return self.request("qrCodeLogin", headers, session = session, systemName = headers["x-line-application"].split("\t")[2], autoLoginIsRequired = True)
+
+if __name__ == "__main__":
+    qr = QRLogin()
+    result = qr.loginWithQrCode("lite", web = True)
+    print("Access Token: " + result.accessToken)
+    print("Certificate: " + result.certificate)
