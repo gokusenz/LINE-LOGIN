@@ -22,6 +22,14 @@ class QRLogin:
         "ipad": {
             "user-agent": "Line/10.21.3",
             "x-line-application": "IOSIPAD\t10.21.3\tiOS\t14.3;SECONDARY"
+        },
+        "chrome": {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.96 Safari/537.36 Edg/88.0.705.50",
+            "X-Line-Application": "CHROMEOS\t2.4.1\tChrome OS\t1"
+        },
+        "desktopwin": {
+            "User-Agent": "Line/6.5.4",
+            "X-Line-Application": "DESKTOPWIN\t6.5.4\tWindows\t10"
         }
     }
 
